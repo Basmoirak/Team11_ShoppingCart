@@ -157,6 +157,7 @@
     <Compile Include="Shop.Core\Models\Basket.cs" />
     <Compile Include="Shop.Core\Models\BasketItem.cs" />
     <Compile Include="Shop.Core\Models\Customer.cs" />
+    <Compile Include="Shop.Core\Models\OrderItem.cs" />
     <Compile Include="Shop.Core\Models\Product.cs" />
     <Compile Include="Shop.Core\ViewModels\BasketItemViewModel.cs" />
     <Compile Include="Shop.Core\ViewModels\BasketSummaryViewModel.cs" />

@@ -48,6 +48,8 @@ namespace Team11_CA.Controllers
                 bool isValidCustomer = hash.VerifyHashedPassword(validCustomer.Password, model.Password);
                 if (isValidCustomer)
                 {
+                    //Store userID into this session
+                    Session["userID"] = validCustomer.Id; 
                     return RedirectToAction("Index", "Home");
                 }
                 else
