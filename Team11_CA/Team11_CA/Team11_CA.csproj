@@ -147,6 +147,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shop.Core\Contracts\IBasketRepository.cs" />
+    <Compile Include="Shop.Core\Contracts\IBasketService.cs" />
     <Compile Include="Shop.Core\Contracts\ICustomerRepository.cs" />
     <Compile Include="Shop.Core\Contracts\IProductRepository.cs" />
     <Compile Include="Shop.Core\Contracts\IRepository.cs" />
@@ -156,6 +157,8 @@
     <Compile Include="Shop.Core\Models\BasketItem.cs" />
     <Compile Include="Shop.Core\Models\Customer.cs" />
     <Compile Include="Shop.Core\Models\Product.cs" />
+    <Compile Include="Shop.Core\ViewModels\BasketItemViewModel.cs" />
+    <Compile Include="Shop.Core\ViewModels\BasketSummaryViewModel.cs" />
     <Compile Include="Shop.Core\ViewModels\LoginViewModel.cs" />
     <Compile Include="Shop.Core\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Shop.Services\BasketService.cs" />
