@@ -129,6 +129,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DataAccess\DataContext.cs" />
+    <Compile Include="DataAccess\Repositories\BasketRepository.cs" />
     <Compile Include="DataAccess\Repositories\ProductRepository.cs" />
     <Compile Include="DataAccess\Repositories\CustomerRepository.cs" />
     <Compile Include="DataAccess\Repositories\Repository.cs" />
@@ -139,17 +140,25 @@
     <Compile Include="Migrations\201910030832162_InitialMigration.Designer.cs">
       <DependentUpon>201910030832162_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910040050178_AddBasket.cs" />
+    <Compile Include="Migrations\201910040050178_AddBasket.Designer.cs">
+      <DependentUpon>201910040050178_AddBasket.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shop.Core\Contracts\IBasketRepository.cs" />
     <Compile Include="Shop.Core\Contracts\ICustomerRepository.cs" />
     <Compile Include="Shop.Core\Contracts\IProductRepository.cs" />
     <Compile Include="Shop.Core\Contracts\IRepository.cs" />
     <Compile Include="Shop.Core\Library\PasswordHash.cs" />
     <Compile Include="Shop.Core\Models\BaseEntity.cs" />
+    <Compile Include="Shop.Core\Models\Basket.cs" />
+    <Compile Include="Shop.Core\Models\BasketItem.cs" />
     <Compile Include="Shop.Core\Models\Customer.cs" />
     <Compile Include="Shop.Core\Models\Product.cs" />
     <Compile Include="Shop.Core\ViewModels\LoginViewModel.cs" />
     <Compile Include="Shop.Core\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Shop.Services\BasketService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -211,6 +220,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910030832162_InitialMigration.resx">
       <DependentUpon>201910030832162_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910040050178_AddBasket.resx">
+      <DependentUpon>201910040050178_AddBasket.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
