@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Team11_CA.DataAccess.Repositories;
+using Team11_CA.Shop.DataAccess.Repositories;
 using Team11_CA.Shop.Core.Models;
+using Team11_CA.Shop.Core.Filters;
 
 namespace Team11_CA.Controllers
 {
+    [LoginFilter]
     public class HomeController : Controller
     {
         private readonly ProductRepository context;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Team11_CA.Shop.Core.Models;
 
-namespace Team11_CA.DataAccess
+namespace Team11_CA.Shop.DataAccess
 {
     public class DataContext : DbContext
     {

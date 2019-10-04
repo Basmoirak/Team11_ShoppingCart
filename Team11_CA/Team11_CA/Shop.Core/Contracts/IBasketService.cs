@@ -8,10 +8,11 @@ namespace Team11_CA.Shop.Core.Contracts
 {
     public interface IBasketService
     {
-        void AddToBasket(HttpContextBase httpContext, string productId, string quantity);
-        List<BasketItemViewModel> GetBasketItems(HttpContextBase httpContext);
-        BasketSummaryViewModel GetBasketSummary(HttpContextBase httpContext);
-        void RemoveFromBasket(HttpContextBase httpContext, string itemId);
-        void ClearBasket(HttpContextBase httpContext);
+        void AddToBasket(string productId, string quantity);
+        List<BasketItemViewModel> GetBasketItems();
+        BasketSummaryViewModel GetBasketSummary();
+        void UpdateBasket(string productId, string quantity);
+        void RemoveFromBasket(string itemId);
+        void ClearBasket();
     }
 }

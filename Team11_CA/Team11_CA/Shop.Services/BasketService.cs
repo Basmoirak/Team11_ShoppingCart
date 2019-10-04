@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Team11_CA.DataAccess.Repositories;
+using Team11_CA.Shop.DataAccess.Repositories;
 using Team11_CA.Shop.Core.Contracts;
 using Team11_CA.Shop.Core.Models;
 using Team11_CA.Shop.Core.ViewModels;
+using Team11_CA.Shop.Core.Library;
 
 namespace Team11_CA.Shop.Services
 {
@@ -14,68 +15,39 @@ namespace Team11_CA.Shop.Services
         ProductRepository productContext;
         BasketRepository basketContext;
 
-        public const string BasketSessionName = "ShoppingBasket";
-
         public BasketService()
         {
             this.productContext = new ProductRepository();
             this.basketContext = new BasketRepository();
         }
 
-        private Basket GetBasket(HttpContextBase httpContext, bool createIfNull)
+        private Basket GetBasket(bool createIfNull)
         {
-            //Get cookie from client side, as it contains basketId for our reference
-            HttpCookie cookie = httpContext.Request.Cookies.Get(BasketSessionName);
+            Basket basket = basketContext.GetBasketFromUserID(HttpContext.Current.Session["UserID"].ToString());
 
-            Basket basket = new Basket();
-
-            if(cookie != null)
-            {
-                string basketId = cookie.Value;
-                if (!string.IsNullOrEmpty(basketId))
-                {
-                    basket = basketContext.Get(basketId);
-                }
-                else
-                {
-                    if (createIfNull)
-                    {
-                        basket = CreateNewBasket(httpContext);
-                    }
-                }
-            }
-            else 
+            if(basket == null)
             {
                 if (createIfNull)
                 {
-                    basket = CreateNewBasket(httpContext);
+                    basket = CreateNewBasket();
                 }
             }
 
             return basket;
         }
-
-        //If cookie does not exist or there is no valid basketId
-        private Basket CreateNewBasket(HttpContextBase httpContext)
+        private Basket CreateNewBasket()
         {
             //Create a new basket in the database
             Basket basket = new Basket();
             basketContext.Add(basket);
             basketContext.Commit();
 
-            //Add basketId into the cookie
-            HttpCookie cookie = new HttpCookie(BasketSessionName);
-            cookie.Value = basket.Id;
-            cookie.Expires = DateTime.Now.AddDays(7);
-            httpContext.Response.Cookies.Add(cookie);
-
             return basket;
         }
-
-        public void AddToBasket(HttpContextBase httpContext, string productId, string quantity)
+        public void AddToBasket(string productId, string quantity)
         {
             //Retrieve basket from the database
-            Basket basket = GetBasket(httpContext, true);
+            Basket basket = GetBasket(true);
 
             //Retrieve product from the basket if it exists
             BasketItem item = basket.BasketItems.FirstOrDefault(x => x.ProductId == productId);
@@ -99,22 +71,22 @@ namespace Team11_CA.Shop.Services
 
             basketContext.Commit();
         }
-        public void UpdateBasket(HttpContextBase httpContext, string productId, string quantity)
+        public void UpdateBasket(string basketId, string quantity)
         {
             //Retrieve basket from the database
-            Basket basket = GetBasket(httpContext, true);
+            Basket basket = GetBasket(true);
 
             //Retrieve product from the basket if it exists
-            BasketItem item = basket.BasketItems.FirstOrDefault(x => x.Id == productId);
+            BasketItem item = basket.BasketItems.FirstOrDefault(x => x.Id == basketId);
 
             item.Quantity = int.Parse(quantity);
             
             basketContext.Commit();
         }
-        public void RemoveFromBasket(HttpContextBase httpContext, string itemId)
+        public void RemoveFromBasket(string basketId)
         {
-            Basket basket = GetBasket(httpContext, true);
-            BasketItem item = basket.BasketItems.FirstOrDefault(x => x.Id == itemId);
+            Basket basket = GetBasket(true);
+            BasketItem item = basket.BasketItems.FirstOrDefault(x => x.Id == basketId);
 
             if(item != null)
             {
@@ -122,10 +94,9 @@ namespace Team11_CA.Shop.Services
                 basketContext.Commit();
             }
         }
-
-        public List<BasketItemViewModel> GetBasketItems(HttpContextBase httpContext)
+        public List<BasketItemViewModel> GetBasketItems()
         {
-            Basket basket = GetBasket(httpContext, false);
+            Basket basket = GetBasket(false);
 
             //If Basket exists, return basketItems to the viewmodel
             //Else, return a new empty list of basketItems to the viewmodel
@@ -149,10 +120,9 @@ namespace Team11_CA.Shop.Services
                 return new List<BasketItemViewModel>();
             }
         }
-
-        public BasketSummaryViewModel GetBasketSummary(HttpContextBase httpContext)
+        public BasketSummaryViewModel GetBasketSummary()
         {
-            Basket basket = GetBasket(httpContext, false);
+            Basket basket = GetBasket(false);
             BasketSummaryViewModel model = new BasketSummaryViewModel(0, 0);
 
             if(basket != null)
@@ -177,9 +147,9 @@ namespace Team11_CA.Shop.Services
                 return model;
             }
         }
-        public void ClearBasket(HttpContextBase httpContext)
+        public void ClearBasket()
         {
-            Basket basket = GetBasket(httpContext, false);
+            Basket basket = GetBasket(false);
             basket.BasketItems.Clear();
             basketContext.Commit();
         }

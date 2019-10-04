@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Team11_CA.DataAccess.Repositories;
+using Team11_CA.Shop.DataAccess.Repositories;
 using Team11_CA.Shop.Core.Library;
 using Team11_CA.Shop.Core.Models;
 using Team11_CA.Shop.Core.ViewModels;
@@ -20,14 +20,12 @@ namespace Team11_CA.Controllers
         }
 
         // GET: Account
-        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
@@ -36,8 +34,8 @@ namespace Team11_CA.Controllers
             }
 
             //Check if customer exists in database
-            Customer validCustomer = context.GetValidCustomer(model.Username);
-            if (validCustomer == null)
+            Customer customer = context.GetValidCustomer(model.Username);
+            if (customer == null)
             {
                 return View(model);
             }
@@ -45,11 +43,13 @@ namespace Team11_CA.Controllers
             {
                 //To verify password provided by client against hashed password in database
                 PasswordHash hash = new PasswordHash();
-                bool isValidCustomer = hash.VerifyHashedPassword(validCustomer.Password, model.Password);
+                bool isValidCustomer = hash.VerifyHashedPassword(customer.Password, model.Password);
                 if (isValidCustomer)
                 {
-                    //Store userID into this session
-                    Session["userID"] = validCustomer.Id; 
+                    string sessionID = Guid.NewGuid().ToString();
+                    Session["SessionID"] = sessionID;
+                    Session["UserID"] = customer.Id;
+                    Session["Username"] = customer.Username;
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -59,14 +59,18 @@ namespace Team11_CA.Controllers
             }
         }
 
-        [AllowAnonymous]
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login", "Account");
+        }
+
         public ActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult Register(RegisterViewModel customer)
         {
             PasswordHash hash = new PasswordHash();

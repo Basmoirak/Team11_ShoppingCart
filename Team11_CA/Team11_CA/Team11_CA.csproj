@@ -129,11 +129,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DataAccess\DataContext.cs" />
-    <Compile Include="DataAccess\Repositories\BasketRepository.cs" />
-    <Compile Include="DataAccess\Repositories\ProductRepository.cs" />
-    <Compile Include="DataAccess\Repositories\CustomerRepository.cs" />
-    <Compile Include="DataAccess\Repositories\Repository.cs" />
+    <Compile Include="Migrations\201910041848048_AddCustomerIdToBasketTable.cs" />
+    <Compile Include="Migrations\201910041848048_AddCustomerIdToBasketTable.Designer.cs">
+      <DependentUpon>201910041848048_AddCustomerIdToBasketTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shop.Core\Filters\LoginFilter.cs" />
+    <Compile Include="Shop.DataAccess\DataContext.cs" />
+    <Compile Include="Shop.DataAccess\Repositories\BasketRepository.cs" />
+    <Compile Include="Shop.DataAccess\Repositories\ProductRepository.cs" />
+    <Compile Include="Shop.DataAccess\Repositories\CustomerRepository.cs" />
+    <Compile Include="Shop.DataAccess\Repositories\Repository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -206,6 +211,7 @@
     <Content Include="Views\Home\ProductDetails.cshtml" />
     <Content Include="Views\Basket\Index.cshtml" />
     <Content Include="Views\Basket\BasketSummary.cshtml" />
+    <Content Include="Views\Shared\LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -230,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910040050178_AddBasket.resx">
       <DependentUpon>201910040050178_AddBasket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910041848048_AddCustomerIdToBasketTable.resx">
+      <DependentUpon>201910041848048_AddCustomerIdToBasketTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
