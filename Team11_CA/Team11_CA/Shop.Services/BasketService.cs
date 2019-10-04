@@ -72,7 +72,7 @@ namespace Team11_CA.Shop.Services
             return basket;
         }
 
-        public void AddToBasket(HttpContextBase httpContext, string productId, string quantity)
+        public void AddToBasket(HttpContextBase httpContext, string productId)
         {
             //Retrieve basket from the database
             Basket basket = GetBasket(httpContext, true);
@@ -87,30 +87,19 @@ namespace Team11_CA.Shop.Services
                 {
                     BasketId = basket.Id,
                     ProductId = productId,
-                    Quantity = int.Parse(quantity)
+                    Quantity = 1
                 };
 
                 basket.BasketItems.Add(item);
             }
             else
             {
-                item.Quantity = item.Quantity + int.Parse(quantity);
+                item.Quantity = item.Quantity + 1;
             }
 
             basketContext.Commit();
         }
-        public void UpdateBasket(HttpContextBase httpContext, string productId, string quantity)
-        {
-            //Retrieve basket from the database
-            Basket basket = GetBasket(httpContext, true);
 
-            //Retrieve product from the basket if it exists
-            BasketItem item = basket.BasketItems.FirstOrDefault(x => x.Id == productId);
-
-            item.Quantity = int.Parse(quantity);
-            
-            basketContext.Commit();
-        }
         public void RemoveFromBasket(HttpContextBase httpContext, string itemId)
         {
             Basket basket = GetBasket(httpContext, true);
@@ -177,6 +166,7 @@ namespace Team11_CA.Shop.Services
                 return model;
             }
         }
+
         public void ClearBasket(HttpContextBase httpContext)
         {
             Basket basket = GetBasket(httpContext, false);
