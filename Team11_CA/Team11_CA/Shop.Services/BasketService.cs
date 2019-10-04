@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Team11_CA.DataAccess.Repositories;
+using Team11_CA.Shop.Core.Contracts;
 using Team11_CA.Shop.Core.Models;
 using Team11_CA.Shop.Core.ViewModels;
 
 namespace Team11_CA.Shop.Services
 {
-    public class BasketService
+    public class BasketService : IBasketService
     {
         ProductRepository productContext;
         BasketRepository basketContext;
@@ -135,6 +136,34 @@ namespace Team11_CA.Shop.Services
             else
             {
                 return new List<BasketItemViewModel>();
+            }
+        }
+
+        public BasketSummaryViewModel GetBasketSummary(HttpContextBase httpContext)
+        {
+            Basket basket = GetBasket(httpContext, false);
+            BasketSummaryViewModel model = new BasketSummaryViewModel(0, 0);
+
+            if(basket != null)
+            {
+                //If there are basket items, return the total quantity. Else, return null
+                int? basketCount = (from item in basket.BasketItems
+                                    select item.Quantity).Sum();
+
+                //If there are basket items, return the total sum of the basket. Else, return null
+                decimal? basketTotal = (from item in basket.BasketItems
+                                        join p in productContext.GetAll() on item.ProductId equals p.Id
+                                        select item.Quantity * p.Price).Sum();
+
+                //If BasketCount or BasketTotal is null, return zero. Else, return value.
+                model.BasketCount = basketCount ?? 0;
+                model.BasketTotal = basketTotal ?? decimal.Zero;
+
+                return model;
+            }
+            else
+            {
+                return model;
             }
         }
     }

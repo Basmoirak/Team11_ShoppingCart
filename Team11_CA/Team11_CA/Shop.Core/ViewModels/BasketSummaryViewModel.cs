@@ -9,6 +9,16 @@ namespace Team11_CA.Shop.Core.ViewModels
     {
         public int BasketCount { get; set; }
         public decimal BasketTotal { get; set; }
-        public int MyProperty { get; set; }
+        public BasketSummaryViewModel()
+        {
+        }
+
+        /*So that when we create a new BasketSummaryViewModel, we can default
+        the basket count and basket total to zero*/
+        public BasketSummaryViewModel(int basketCount, decimal basketTotal)
+        {
+            this.BasketCount = basketCount;
+            this.BasketTotal = basketTotal;
+        }
     }
 }
