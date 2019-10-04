@@ -1,6 +1,12 @@
 ﻿@model Team11_CA.Shop.Core.ViewModels.BasketSummaryViewModel
 
-<ul class="nav navbar-nav navbar-right">
-    <li><a href="@Url.Action("Index", "Basket")">@Model.BasketCount items</a></li>
-    <li><a href="@Url.Action("Index", "Basket")">@String.Format("{0:c}", Model.BasketTotal)</a></li>
-</ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href="@Url.Action("Index", "Basket")">
+                <span class="glyphicon glyphicon-shopping-cart" style="color: green"></span>&nbsp;
+                @Model.BasketCount items
+                
+            </a>
+        </li>
+        <li><a href="@Url.Action("Index", "Basket")">@String.Format("{0:c}", Model.BasketTotal)</a></li>
+    </ul>
