@@ -183,12 +183,5 @@ namespace Team11_CA.Shop.Services
             basket.BasketItems.Clear();
             basketContext.Commit();
         }
-
-        public void ClearBasket(HttpContextBase httpContext)
-        {
-            Basket basket = GetBasket(httpContext, false);
-            basket.BasketItems.Clear();
-            basketContext.Commit();
-        }
     }
 }
