@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Team11_CA.Shop.Core.ViewModels;
 using Team11_CA.Shop.Services;
 
+
 namespace Team11_CA.Controllers
 {
     public class BasketController : Controller
@@ -25,16 +26,28 @@ namespace Team11_CA.Controllers
             return View(model);
         }
 
-        public ActionResult AddToBasket(string Id)
+        public ActionResult AddToBasket(string Id, string quantity)
         {
-            basketService.AddToBasket(this.HttpContext, Id);
+            basketService.AddToBasket(this.HttpContext, Id, quantity);
 
             return RedirectToAction("Index","Home");
+        }
+        public ActionResult UpdateBasket(string Id, string quantity)
+        {
+            basketService.UpdateBasket(this.HttpContext, Id, quantity);
+
+            return RedirectToAction("Index", "Basket");
         }
 
         public ActionResult RemoveFromBasket(string Id)
         {
             basketService.RemoveFromBasket(this.HttpContext, Id);
+
+            return RedirectToAction("Index");
+        }
+        public ActionResult ClearBasket()
+        {
+            basketService.ClearBasket(this.HttpContext);
 
             return RedirectToAction("Index");
         }
@@ -45,5 +58,6 @@ namespace Team11_CA.Controllers
 
             return PartialView(basketSummary);
         }
+  
     }
 }
