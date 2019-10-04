@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Team11_CA.DataAccess.Repositories;
 using Team11_CA.Shop.Core.Models;
+using Team11_CA.Shop.Core.ViewModels;
 
 namespace Team11_CA.Shop.Services
 {
@@ -107,6 +108,33 @@ namespace Team11_CA.Shop.Services
             {
                 basket.BasketItems.Remove(item);
                 basketContext.Commit();
+            }
+        }
+
+        public List<BasketItemViewModel> GetBasketItems(HttpContextBase httpContext)
+        {
+            Basket basket = GetBasket(httpContext, false);
+
+            //If Basket exists, return basketItems to the viewmodel
+            //Else, return a new empty list of basketItems to the viewmodel
+            if(basket != null)
+            {
+                var result = (from b in basket.BasketItems
+                              join p in productContext.GetAll() on b.ProductId equals p.Id
+                              select new BasketItemViewModel()
+                              {
+                                  Id = b.Id,
+                                  Quantity = b.Quantity,
+                                  ProductName = p.Name,
+                                  Image = p.Image,
+                                  Price = p.Price
+                              }).ToList();
+
+                return result;
+            }
+            else
+            {
+                return new List<BasketItemViewModel>();
             }
         }
     }
