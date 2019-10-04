@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Team11_CA.DataAccess.Repositories;
+using Team11_CA.Shop.Core.Models;
 
 namespace Team11_CA.Controllers
 {
@@ -15,9 +16,37 @@ namespace Team11_CA.Controllers
         {
             this.context = new ProductRepository();
         }
-        public ActionResult Index()
+
+        public ActionResult Index(string searchStr = null)
         {
-            return View();
+            //Retrieve all products from database
+            IEnumerable<Product> productList = context.GetAll().ToList();
+
+            if(searchStr == null)
+            {
+                return View(productList);
+            }
+            else
+            {
+                //Filter and return list of products based on search string
+                productList = context.GetFilteredProductList(searchStr, productList);
+                return View(productList);
+            }
+        }
+
+        public ActionResult ProductDetails(string Id)
+        {
+            //Retrieve product from database based on productId
+            Product product = context.Get(Id);
+
+            if(product == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(product);
+            }
         }
     }
 }

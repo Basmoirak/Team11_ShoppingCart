@@ -35,15 +35,16 @@ namespace Team11_CA.Controllers
                 return View(model);
             }
 
-            PasswordHash hash = new PasswordHash();
-
-            var validCustomer = context.GetValidCustomer(model.Username);
+            //Check if customer exists in database
+            Customer validCustomer = context.GetValidCustomer(model.Username);
             if (validCustomer == null)
             {
                 return View(model);
             }
             else
             {
+                //To verify password provided by client against hashed password in database
+                PasswordHash hash = new PasswordHash();
                 bool isValidCustomer = hash.VerifyHashedPassword(validCustomer.Password, model.Password);
                 if (isValidCustomer)
                 {
@@ -69,8 +70,9 @@ namespace Team11_CA.Controllers
             PasswordHash hash = new PasswordHash();
             context.Add(new Customer
             {
-                Username = customer.Username,
+                //Store hashed password into the database
                 Password = hash.HashPassword(customer.Password),
+                Username = customer.Username,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 Address = customer.Address,

@@ -9,9 +9,7 @@ namespace Team11_CA.DataAccess.Repositories
 {
     public class CustomerRepository : Repository<Customer>, ICustomerRepository
     {
-        public CustomerRepository()
-        {
-        }
+        //Custom method to retrieve customer object based on username
         public Customer GetValidCustomer(string username)
         {
             return _context.Set<Customer>()

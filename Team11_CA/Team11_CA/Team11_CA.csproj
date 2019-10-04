@@ -149,7 +149,6 @@
     <Compile Include="Shop.Core\Models\Customer.cs" />
     <Compile Include="Shop.Core\Models\Product.cs" />
     <Compile Include="Shop.Core\ViewModels\LoginViewModel.cs" />
-    <Compile Include="Shop.Core\ViewModels\ProductListViewModel.cs" />
     <Compile Include="Shop.Core\ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -190,9 +189,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Home\ProductDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
