@@ -72,7 +72,7 @@ namespace Team11_CA.Shop.Services
             return basket;
         }
 
-        public void AddToBasket(HttpContextBase httpContext, string productId)
+        public void AddToBasket(HttpContextBase httpContext, string productId, string quantity)
         {
             //Retrieve basket from the database
             Basket basket = GetBasket(httpContext, true);
