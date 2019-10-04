@@ -1,30 +1,31 @@
 ﻿@model IEnumerable<Team11_CA.Shop.Core.Models.Product>
 
 <br />
-<div class="form-inline md-form form-sm mt-0">
-    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-           name="searchStr" id="searchBox">
+<div class="form-inline lg-form form-sm mt-0">
+    <input class="form-control form-control-sm ml-3 w-100" type="text" placeholder="Search"
+           name="searchStr" id="searchBox" autofocus style="width: 800px">
+    
 </div>
-<br />
+<br/>
 
-@foreach (var item in Model)
-{
-    <div class="col-md-3" style="height:450px;padding:10px;margin:25px;border: solid thin lightgray">
-        <div class="col-md-12">
-            <img class="img" style="height:200px;" src="~/Images/@item.Image" />
+<div class="row">
+    @foreach(var item in Model)
+    {
+        <div class="col-lg-3">
+            <div class="panel panel-primary">
+                <img class="img" style="height:200px; margin-left:20px;" src="~/Images/@item.Image" />
+
+                <div class="panel-heading">
+                    <h4>@Html.ActionLink(item.Name, "ProductDetails", new { id = item.Id }, new { @style = "text-decoration: none; color: white" })</h4>
+                </div>
+                <div class="panel-body" style="max-height: 90px; overflow-y: scroll;">
+                    <p>@item.Description</p>
+                    <h4>$@item.Price</h4>
+                </div>
+                <div class="panel-footer">
+                    <a href="@Url.Action("AddToBasket", "Basket", new { id = item.Id})" class="btn btn-block btn btn-lg btn btn-success">Add to Cart</a>
+                </div>
+            </div>
         </div>
-        <div class="col-md-12">
-            <h4><strong>@Html.ActionLink(item.Name, "ProductDetails", new { id = item.Id })</strong></h4>
-        </div>
-        <div class="col-md-12">
-            <p>@item.Description</p>
-        </div>
-        <div class="col-md-12">
-            <h4>$@item.Price</h4>
-        </div>
-        <div class="col-md-12">
-            <a href="@Url.Action("AddToBasket", "Basket", new { id = item.Id})" class="btn btn-default">Add to Cart</a>
-        </div>
-    </div>
-}
-<div class="col-md-12 clearfix" />
+    }
+</div>
