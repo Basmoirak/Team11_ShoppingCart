@@ -60,6 +60,47 @@ namespace Team11_CA.Shop.Services
 
             return activationCodes;
         }
+        //my changes
+        public List<MyPurchasesViewModel> GetPurchaseOrderSummaryByOrderId(string orderId)
+        {
+            string customerId = HttpContext.Current.Session["UserID"].ToString();
+            List<MyPurchasesViewModel> model = new List<MyPurchasesViewModel>();
+            IEnumerable<Order> orders = orderContext.GetAll();
+            IEnumerable<Product> products = productContext.GetAll();
+
+            //Group DateCreated and ProductID together
+            var query = orders.Where(order => order.CustomerID == customerId && order.Id == orderId )
+                  .Select(order => order.OrderItems
+                  .GroupBy(item => new
+                  {
+                      item.DateCreated,
+                      item.ProductID
+                  }).Select(grp => new
+                  {
+                      DateCreated = grp.Key.DateCreated,
+                      ProductID = grp.Key.ProductID,
+                      Quantity = grp.Count()
+                  }).ToList());
+
+            //Add entire customer order history into the model
+            foreach (var order in query)
+            {
+                foreach (var item in order)
+                {
+                    model.Add(new MyPurchasesViewModel
+                    {
+                        OrderCreatedDate = item.DateCreated.ToString("dd - MMMM - yyyy"),
+                        OrderQuantity = item.Quantity,
+                        ActivationCodes = GetActivationCodeList(item.ProductID, item.DateCreated),
+                        ProductDescription = productContext.GetProductDescription(item.ProductID, products),
+                        ProductImage = productContext.GetProductImage(item.ProductID, products),
+                        ProductName = productContext.GetProductName(item.ProductID, products)
+                    });
+                }
+            }
+
+            return model;
+        }
         public List<MyPurchasesViewModel> GetPurchaseOrderSummary()
         {
             string customerId = HttpContext.Current.Session["UserID"].ToString();
@@ -88,7 +129,7 @@ namespace Team11_CA.Shop.Services
                 {
                     model.Add(new MyPurchasesViewModel
                     {
-                        OrderCreatedDate = item.DateCreated.ToString("dd/mm/yyyy"),
+                        OrderCreatedDate = item.DateCreated.ToString("dd - MMMM - yyyy"),
                         OrderQuantity = item.Quantity,
                         ActivationCodes = GetActivationCodeList(item.ProductID, item.DateCreated),
                         ProductDescription = productContext.GetProductDescription(item.ProductID, products),

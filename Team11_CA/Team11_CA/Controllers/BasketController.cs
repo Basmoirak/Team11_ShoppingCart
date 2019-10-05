@@ -87,10 +87,18 @@ namespace Team11_CA.Controllers
             }
 
         }
-        public ActionResult MyPurchases()
+        public ActionResult MyPurchases(string orderId)
         {
+            
             List<MyPurchasesViewModel> model = new List<MyPurchasesViewModel>();
-            model = orderService.GetPurchaseOrderSummary();
+            if (orderId != null)
+            {
+                model = orderService.GetPurchaseOrderSummaryByOrderId(orderId);
+            }
+            else
+            {
+                model = orderService.GetPurchaseOrderSummary();
+            }
             return View(model);
         }
     }

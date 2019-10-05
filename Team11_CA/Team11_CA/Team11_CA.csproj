@@ -185,12 +185,31 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\niceselect\.gitignore" />
+    <Content Include="Content\niceselect\css\nice-select.css" />
+    <Content Include="Content\niceselect\css\style.css" />
+    <Content Include="Content\niceselect\gulpfile.js" />
+    <Content Include="Content\niceselect\index.html" />
+    <Content Include="Content\niceselect\js\fastclick.js" />
+    <Content Include="Content\niceselect\js\jquery.js" />
+    <Content Include="Content\niceselect\js\jquery.nice-select.js" />
+    <Content Include="Content\niceselect\js\jquery.nice-select.min.js" />
+    <Content Include="Content\niceselect\js\prism.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\niceselect\bower.json" />
+    <Content Include="Content\niceselect\dropdown.sketch" />
+    <Content Include="Content\niceselect\package.json" />
+    <Content Include="Content\niceselect\README.md" />
+    <Content Include="Content\niceselect\scss\nice-select.scss" />
+    <Content Include="Content\niceselect\scss\style.scss" />
+    <Content Include="Content\niceselect\scss\_nice-select-prefixed.scss" />
+    <Content Include="Content\niceselect\scss\_prism.scss" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -226,7 +245,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

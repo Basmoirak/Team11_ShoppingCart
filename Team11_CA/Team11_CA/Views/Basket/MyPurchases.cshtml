@@ -1,48 +1,42 @@
 ﻿@model IEnumerable<Team11_CA.Shop.Core.ViewModels.MyPurchasesViewModel>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductImage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderCreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderQuantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivationCodes)
-        </th>
-    </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        <img style="height:50px" src="~/Images/@item.ProductImage" alt="Alternate Text" />
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ProductName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ProductDescription)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.OrderCreatedDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.OrderQuantity)
-    </td>
-    <td>
-        @Html.DropDownListFor(modelItem => item.ActivationCodes, new SelectList(item.ActivationCodes), new { @class = "form-control" })
-    </td>
-</tr>
-}
+        @foreach (var item in Model)
+        {
+            <div class="panel panel-pink ">
+                <!-- Default panel contents -->
+                <div class="panel-heading">@Html.DisplayFor(modelItem => item.ProductName) x <span style="font-weight: 700; font-size: 20px; color: lawngreen">@Html.DisplayFor(modelItem => item.OrderQuantity)</span></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <img class="img-responsive" src="~/Images/@item.ProductImage" alt="Alternate Text" />
+                        </div>
+                        <div class="col-lg-8">
+                            <strong>Product Description</strong>
+                            <div class="well well-sm">
+                                <p>@Html.DisplayFor(modelItem => item.ProductDescription)</p>
+                              
+                            </div>
+                            <hr />
+                            <strong>Order Created On</strong>
+                            <div class="well well-sm">
+                                <p><i><b>@Html.DisplayFor(modelItem => item.OrderCreatedDate)</b></i></p>
+                            </div>
+                           <hr />
+                            <strong>Activation Codes</strong>
+                            <div class="">
+                                @Html.DropDownListFor(modelItem => item.ActivationCodes, new SelectList(item.ActivationCodes), new { @class = "form-control activationcodes" })
 
-</table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <!-- List group -->
+                <ul class="list-group">
+                    <li class="list-group-item">Total </li>
+
+                </ul>
+            </div>
+        }

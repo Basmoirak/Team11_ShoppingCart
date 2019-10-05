@@ -6,22 +6,35 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="shortcut icon" href="~/Images/logo.png" type="image/x-icon">
+    <link href="~/Content/niceselect/css/nice-select.css" rel="stylesheet" />
 </head>
 <body onload="onLoad();">
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <div class="navbar navbar-default navbar-fixed-top" style="background-color: lightblue;">
+        <div class="container-fluid">
+            
             <div class="navbar-header">
+
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <div class="navbar-brand" href="/">
+                    <img src="~/Images/Logo.png" alt="Brand" style="height: 50px;" />
+                </div>
+                @Html.ActionLink("My Shop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "font-weight: 700; color: #498f9c" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 </ul>
+                <div class="form-inline navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search.." name="searchStr" id="searchBox">
+                    </div>
+                   
+                </div>
                 @Html.Partial("LoginPartial")
                 @{
                     if (Session["SessionID"] != null)
@@ -45,9 +58,13 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-
+<script src="~/Content/niceselect/js/jquery.nice-select.min.js"></script>
 <script>
     $(document).ready(() => {
+
+        //nice select plugin for activation code select
+        $('.activationcodes').niceSelect();
+
         $('.add').click(function () {
 		
     	$(this).prev().val(+$(this).prev().val() + 1);

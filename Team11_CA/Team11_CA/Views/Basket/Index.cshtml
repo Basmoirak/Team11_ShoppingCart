@@ -4,76 +4,88 @@
     ViewBag.Title = "Index";
 }
 
-<h2>
-    Your Basket
-    <a href="@Url.Action("ClearBasket", "Basket")" style="float: right" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-trash"></span> Clear Basket</a>
-</h2>
 
-<table class="table table-hover">
-    <thead>
-        <tr class="info">
-            <th></th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                SubTotal
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr style="height: auto;">
-                <td><img style="height:50px" src="~/Images/@item.Image" alt="Alternate Text" /></td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                @using (Html.BeginForm("UpdateBasket", "Basket", FormMethod.Post))
-                {
-                <td>
-                    <div class="plusmimus">
-                        <input type="hidden" name="id" value="@item.BasketId" />
-                        <button type="button" id="sub" class="sub btn btn-success">-</button>
-                        <input type="text" id="1" value="@item.Quantity" min="1" style="width: 20px; border: none; outline: none; background: transparent" name="quantity">
-                        <button type="button" id="add" class="add btn btn-success">+</button>
-                    </div>
-                </td>
-
-                <td>
-                    @String.Format("{0:c}", item.Price)
-                </td>
-                <td>
-                    @String.Format("{0:c}", item.Price * item.Quantity)
-                </td>
-                <td>
-                    <button class="btn btn-info"><span class="glyphicon glyphicon-refresh" type="submit"></span></button>
-                    <a href="@Url.Action("RemoveFromBasket", "Basket", new { Id = item.BasketId })" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-                }
+@if (Model.Count() == 0)
+{
+    <div class="jumbotron">
+        <h4><b><i>Your Basket is Empty</i></b></h4>
+        <p>Contine Shopping?</p>
+        <p><a class="btn btn-primary btn-lg" href="@Url.Action("Index", "Home")" role="button">Go to Home</a></p>
+    </div>
+}
+else
+{
+    <h2>
+        Your Basket
+        <a href="@Url.Action("ClearBasket", "Basket")" style="float: right" class="btn btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-trash"></span> Clear Basket</a>
+    </h2>
+    <table class="table table-hover">
+        <thead>
+            <tr class="info">
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    SubTotal
+                </th>
+                <th></th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="height: auto;">
+                    <td><img style="height:50px" src="~/Images/@item.Image" alt="Alternate Text" /></td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    @using (Html.BeginForm("UpdateBasket", "Basket", FormMethod.Post))
+                    {
+                        <td>
+                            <div class="plusmimus">
+                                <input type="hidden" name="id" value="@item.BasketId" />
+                                <button type="button" id="sub" class="sub btn btn-success">-</button>
+                                <input type="text" id="1" value="@item.Quantity" min="1" style="width: 20px; border: none; outline: none; background: transparent" name="quantity">
+                                <button type="button" id="add" class="add btn btn-success">+</button>
+                            </div>
+                        </td>
 
-        <tr>
-            <td colspan="4" style="text-align:right; font-size: 20px"><strong>Basket Total</strong></td>
-            <td><p style="font-size: 20px" class="text-info">@String.Format("{0:c}", (from p in Model select p.Price * p.Quantity).Sum())</p></td>
-            <td>
-                <a href="@Url.Action("Checkout", "Basket")" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Checkout</a>
-            </td>
-        </tr>
-    </tbody>
-   </table>
+                        <td>
+                            @String.Format("{0:c}", item.Price)
+                        </td>
+                        <td>
+                            @String.Format("{0:c}", item.Price * item.Quantity)
+                        </td>
+                        <td>
+                            <button class="btn btn-info"><span class="glyphicon glyphicon-refresh" type="submit"></span></button>
+                            <a href="@Url.Action("RemoveFromBasket", "Basket", new { Id = item.BasketId })" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                    }
+                </tr>
+            }
 
-   
+            <tr>
+                <td colspan="4" style="text-align:right; font-size: 20px"><strong>Basket Total</strong></td>
+                <td><p style="font-size: 20px" class="text-info">@String.Format("{0:c}", (from p in Model select p.Price * p.Quantity).Sum())</p></td>
+                <td>
+                    <a href="@Url.Action("Checkout", "Basket")" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Checkout</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
 
 
-  
+
+
+
+
 
 
