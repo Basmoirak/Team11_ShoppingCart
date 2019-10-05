@@ -156,5 +156,10 @@ namespace Team11_CA.Shop.Services
             basket.BasketItems.Clear();
             basketContext.Commit();
         }
+        public int CheckBasketQuantity()
+        {
+            Basket basket = GetBasket(false);
+            return basket.BasketItems.Count();
+        }
     }
 }

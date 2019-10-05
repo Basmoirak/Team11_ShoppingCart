@@ -18,5 +18,26 @@ namespace Team11_CA.Shop.DataAccess.Repositories
 
             return filter;
         }
+
+        public string GetProductImage(string productID, IEnumerable<Product> productList)
+        {
+            string image = productList.Where(product => product.Id == productID)
+                                      .Select(x => x.Image).FirstOrDefault();
+            return image;
+        }
+
+        public string GetProductDescription(string productID, IEnumerable<Product> productList)
+        {
+            string description = productList.Where(product => product.Id == productID)
+                                            .Select(x => x.Description).FirstOrDefault();
+            return description;
+        }
+
+        public string GetProductName(string productID, IEnumerable<Product> productList)
+        {
+            string name = productList.Where(product => product.Id == productID)
+                                            .Select(x => x.Name).FirstOrDefault();
+            return name;
+        }
     }
 }

@@ -67,20 +67,31 @@ namespace Team11_CA.Controllers
         {
             Order order = new Order();
             var basketItems = basketService.GetBasketItems();
+            int basketItemQty = basketService.CheckBasketQuantity();
 
-            //Set Order Status to Completed
-            order.OrderStatus = "Order Completed";
+            //If the basket is empty
+            if(basketItemQty < 1)
+            {
+                return RedirectToAction("Index","Basket");
+            }
+            else
+            {
+                //Set Order Status to Completed
+                order.OrderStatus = "Order Completed";
 
-            //Create Order and clear Shopping Cart Basket
-            orderService.CreateOrder(order, basketItems);
-            basketService.ClearBasket();
+                //Create Order and clear Shopping Cart Basket
+                orderService.CreateOrder(order, basketItems);
+                basketService.ClearBasket();
 
-            return RedirectToAction("MyPurchases", new { OrderId = order.Id });
+                return RedirectToAction("MyPurchases", new { OrderId = order.Id });
+            }
+
         }
-        public ActionResult MyPurchases(string OrderId)
+        public ActionResult MyPurchases()
         {
-            ViewBag.OrderId = OrderId;
-            return View();
+            List<MyPurchasesViewModel> model = new List<MyPurchasesViewModel>();
+            model = orderService.GetPurchaseOrderSummary();
+            return View(model);
         }
     }
 }

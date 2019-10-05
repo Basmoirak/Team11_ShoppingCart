@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Team11_CA.Shop.Core.ViewModels.MyPurchasesViewModel>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderCreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActivationCodes)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        <img style="height:50px" src="~/Images/@item.ProductImage" alt="Alternate Text" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductDescription)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.OrderCreatedDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.OrderQuantity)
+    </td>
+    <td>
+        @Html.DropDownListFor(modelItem => item.ActivationCodes, new SelectList(item.ActivationCodes), new { @class = "form-control" })
+    </td>
+</tr>
+}
+
+</table>

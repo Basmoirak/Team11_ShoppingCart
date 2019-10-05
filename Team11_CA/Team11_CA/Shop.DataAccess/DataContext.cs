@@ -13,7 +13,6 @@ namespace Team11_CA.Shop.DataAccess
             : base("name=DefaultConnection")
         {
         }
-
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Basket> Baskets { get; set; }

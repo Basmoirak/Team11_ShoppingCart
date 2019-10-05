@@ -14,5 +14,6 @@ namespace Team11_CA.Shop.Core.Contracts
         void UpdateBasket(string productId, string quantity);
         void RemoveFromBasket(string itemId);
         void ClearBasket();
+        int CheckBasketQuantity();
     }
 }

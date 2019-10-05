@@ -10,5 +10,6 @@ namespace Team11_CA.Shop.Core.Contracts
     public interface IOrderService
     {
         void CreateOrder(Order baseOrder, List<BasketItemViewModel> basketItems);
+        List<MyPurchasesViewModel> GetPurchaseOrderSummary();
     }
 }
