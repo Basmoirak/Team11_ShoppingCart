@@ -25,18 +25,27 @@
                            <hr />
                             <strong>Activation Codes</strong>
                             <div class="">
-                                @Html.DropDownListFor(modelItem => item.ActivationCodes, new SelectList(item.ActivationCodes), new { @class = "form-control activationcodes" })
-
+                                <!--Changed to only display dropdownlist if quantity > 1-->
+                                @{
+                                    if (item.ActivationCodes.Count() > 1)
+                                    {
+                                        @Html.DropDownListFor(modelItem => item.ActivationCodes, new SelectList(item.ActivationCodes), new { @class = "form-control activationcodes" })
+                                    }
+                                    else
+                                    {
+                                        <div class="well well-sm">
+                                            <p>@Html.DisplayFor(modelItem => item.ActivationCodes)</p>
+                                        </div>
+                                    }
+                                }
                             </div>
                         </div>
                     </div>
-                    
                 </div>
 
                 <!-- List group -->
                 <ul class="list-group">
-                    <li class="list-group-item">Total </li>
-
+                    <li class="list-group-item">Total: @String.Format("{0:c}",item.OrderQuantity*item.ProductPrice)</li>
                 </ul>
             </div>
         }

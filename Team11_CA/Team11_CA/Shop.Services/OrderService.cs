@@ -60,7 +60,6 @@ namespace Team11_CA.Shop.Services
 
             return activationCodes;
         }
-        //my changes
         public List<MyPurchasesViewModel> GetPurchaseOrderSummaryByOrderId(string orderId)
         {
             string customerId = HttpContext.Current.Session["UserID"].ToString();
@@ -68,7 +67,7 @@ namespace Team11_CA.Shop.Services
             IEnumerable<Order> orders = orderContext.GetAll();
             IEnumerable<Product> products = productContext.GetAll();
 
-            //Group DateCreated and ProductID together
+            //Group DateCreated and ProductID together, for current customer and order
             var query = orders.Where(order => order.CustomerID == customerId && order.Id == orderId )
                   .Select(order => order.OrderItems
                   .GroupBy(item => new
@@ -82,7 +81,6 @@ namespace Team11_CA.Shop.Services
                       Quantity = grp.Count()
                   }).ToList());
 
-            //Add entire customer order history into the model
             foreach (var order in query)
             {
                 foreach (var item in order)
@@ -94,7 +92,8 @@ namespace Team11_CA.Shop.Services
                         ActivationCodes = GetActivationCodeList(item.ProductID, item.DateCreated),
                         ProductDescription = productContext.GetProductDescription(item.ProductID, products),
                         ProductImage = productContext.GetProductImage(item.ProductID, products),
-                        ProductName = productContext.GetProductName(item.ProductID, products)
+                        ProductName = productContext.GetProductName(item.ProductID, products),
+                        ProductPrice = productContext.GetProductPrice(item.ProductID, products)
                     });
                 }
             }
@@ -134,7 +133,8 @@ namespace Team11_CA.Shop.Services
                         ActivationCodes = GetActivationCodeList(item.ProductID, item.DateCreated),
                         ProductDescription = productContext.GetProductDescription(item.ProductID, products),
                         ProductImage = productContext.GetProductImage(item.ProductID, products),
-                        ProductName = productContext.GetProductName(item.ProductID, products)
+                        ProductName = productContext.GetProductName(item.ProductID, products),
+                        ProductPrice = productContext.GetProductPrice(item.ProductID, products)
                     });
                 }
             }

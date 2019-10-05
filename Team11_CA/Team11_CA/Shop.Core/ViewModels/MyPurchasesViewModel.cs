@@ -16,6 +16,8 @@ namespace Team11_CA.Shop.Core.ViewModels
 
         [Display(Name = "Product Description")]
         public string ProductDescription { get; set; }
+        [Display(Name = "Price")]
+        public decimal ProductPrice { get; set; }
 
         [Display(Name = "Order Created Date")]
         public string OrderCreatedDate { get; set; }

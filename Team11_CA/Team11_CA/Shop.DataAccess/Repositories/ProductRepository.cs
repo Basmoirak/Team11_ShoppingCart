@@ -39,5 +39,11 @@ namespace Team11_CA.Shop.DataAccess.Repositories
                                             .Select(x => x.Name).FirstOrDefault();
             return name;
         }
+        public decimal GetProductPrice(string productID, IEnumerable<Product> productList)
+        {
+            decimal price = productList.Where(product => product.Id == productID)
+                                            .Select(x => x.Price).FirstOrDefault();
+            return price;
+        }
     }
 }

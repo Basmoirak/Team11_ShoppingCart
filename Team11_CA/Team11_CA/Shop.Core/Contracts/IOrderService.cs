@@ -11,5 +11,6 @@ namespace Team11_CA.Shop.Core.Contracts
     {
         void CreateOrder(Order baseOrder, List<BasketItemViewModel> basketItems);
         List<MyPurchasesViewModel> GetPurchaseOrderSummary();
+        List<MyPurchasesViewModel> GetPurchaseOrderSummaryByOrderId(string orderId);
     }
 }
