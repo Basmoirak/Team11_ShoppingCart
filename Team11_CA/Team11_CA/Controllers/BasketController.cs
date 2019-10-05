@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Team11_CA.Shop.Core.Filters;
+using Team11_CA.Shop.Core.Models;
 using Team11_CA.Shop.Core.ViewModels;
 using Team11_CA.Shop.Services;
 
@@ -13,10 +14,12 @@ namespace Team11_CA.Controllers
     public class BasketController : Controller
     {
         BasketService basketService;
+        OrderService orderService;
 
         public BasketController()
         {
             this.basketService = new BasketService();
+            this.orderService = new OrderService();
         }
 
         // GET: Basket
@@ -59,6 +62,30 @@ namespace Team11_CA.Controllers
 
             return PartialView(basketSummary);
         }
-  
+
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Checkout(Order order)
+        {
+            var basketItems = basketService.GetBasketItems();
+            order.OrderStatus = "Order Created";
+
+            //Process Payment
+
+            order.OrderStatus = "Payment Processed";
+            orderService.CreateOrder(order, basketItems);
+            basketService.ClearBasket();
+            return RedirectToAction("Thank you", new { OrderId = order.Id });
+        }
+
+        public ActionResult ThankYou(string OrderId)
+        {
+            ViewBag.OrderId = OrderId;
+            return View();
+        }
     }
 }

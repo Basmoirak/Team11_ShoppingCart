@@ -133,9 +133,17 @@
     <Compile Include="Migrations\201910041848048_AddCustomerIdToBasketTable.Designer.cs">
       <DependentUpon>201910041848048_AddCustomerIdToBasketTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910050119313_AddOrders.cs" />
+    <Compile Include="Migrations\201910050119313_AddOrders.Designer.cs">
+      <DependentUpon>201910050119313_AddOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shop.Core\Contracts\IOrderRepository.cs" />
+    <Compile Include="Shop.Core\Contracts\IOrderService.cs" />
     <Compile Include="Shop.Core\Filters\LoginFilter.cs" />
+    <Compile Include="Shop.Core\Models\Order.cs" />
     <Compile Include="Shop.DataAccess\DataContext.cs" />
     <Compile Include="Shop.DataAccess\Repositories\BasketRepository.cs" />
+    <Compile Include="Shop.DataAccess\Repositories\OrderRepository.cs" />
     <Compile Include="Shop.DataAccess\Repositories\ProductRepository.cs" />
     <Compile Include="Shop.DataAccess\Repositories\CustomerRepository.cs" />
     <Compile Include="Shop.DataAccess\Repositories\Repository.cs" />
@@ -169,6 +177,7 @@
     <Compile Include="Shop.Core\ViewModels\LoginViewModel.cs" />
     <Compile Include="Shop.Core\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Shop.Services\BasketService.cs" />
+    <Compile Include="Shop.Services\OrderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -239,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910041848048_AddCustomerIdToBasketTable.resx">
       <DependentUpon>201910041848048_AddCustomerIdToBasketTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910050119313_AddOrders.resx">
+      <DependentUpon>201910050119313_AddOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
