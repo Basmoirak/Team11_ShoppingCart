@@ -65,24 +65,19 @@ namespace Team11_CA.Controllers
 
         public ActionResult Checkout()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Checkout(Order order)
-        {
+            Order order = new Order();
             var basketItems = basketService.GetBasketItems();
-            order.OrderStatus = "Order Created";
 
-            //Process Payment
+            //Set Order Status to Completed
+            order.OrderStatus = "Order Completed";
 
-            order.OrderStatus = "Payment Processed";
+            //Create Order and clear Shopping Cart Basket
             orderService.CreateOrder(order, basketItems);
             basketService.ClearBasket();
-            return RedirectToAction("Thank you", new { OrderId = order.Id });
-        }
 
-        public ActionResult ThankYou(string OrderId)
+            return RedirectToAction("MyPurchases", new { OrderId = order.Id });
+        }
+        public ActionResult MyPurchases(string OrderId)
         {
             ViewBag.OrderId = OrderId;
             return View();

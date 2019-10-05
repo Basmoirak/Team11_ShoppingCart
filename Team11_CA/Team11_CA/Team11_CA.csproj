@@ -141,6 +141,7 @@
     <Compile Include="Shop.Core\Contracts\IOrderService.cs" />
     <Compile Include="Shop.Core\Filters\LoginFilter.cs" />
     <Compile Include="Shop.Core\Models\Order.cs" />
+    <Compile Include="Shop.Core\ViewModels\MyPurchasesViewModel.cs" />
     <Compile Include="Shop.DataAccess\DataContext.cs" />
     <Compile Include="Shop.DataAccess\Repositories\BasketRepository.cs" />
     <Compile Include="Shop.DataAccess\Repositories\OrderRepository.cs" />

@@ -26,7 +26,7 @@ namespace Team11_CA.Shop.Services
                 {
                     baseOrder.OrderItems.Add(new OrderItem()
                     {
-                        ProductID = item.Id,
+                        ProductID = item.ProductId,
                     });
                 }
 

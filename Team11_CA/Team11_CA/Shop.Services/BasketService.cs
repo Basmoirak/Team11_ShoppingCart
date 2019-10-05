@@ -108,8 +108,9 @@ namespace Team11_CA.Shop.Services
                               join p in productContext.GetAll() on b.ProductId equals p.Id
                               select new BasketItemViewModel()
                               {
-                                  Id = b.Id,
+                                  BasketId = b.Id,
                                   Quantity = b.Quantity,
+                                  ProductId = p.Id,
                                   ProductName = p.Name,
                                   Image = p.Image,
                                   Price = p.Price

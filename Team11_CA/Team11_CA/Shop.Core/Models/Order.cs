@@ -9,7 +9,8 @@ namespace Team11_CA.Shop.Core.Models
     {
         public Order()
         {
-
+            this.CustomerID = HttpContext.Current.Session["UserID"].ToString();
+            this.OrderItems = new List<OrderItem>();
         }
 
         public string CustomerID { get; set; }
