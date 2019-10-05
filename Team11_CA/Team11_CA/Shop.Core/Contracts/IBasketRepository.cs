@@ -8,5 +8,6 @@ namespace Team11_CA.Shop.Core.Contracts
 {
     public interface IBasketRepository : IRepository<Basket>
     {
+        Basket GetBasketFromUserID(string Id);
     }
 }

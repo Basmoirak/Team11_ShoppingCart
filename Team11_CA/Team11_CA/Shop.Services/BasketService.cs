@@ -79,9 +79,11 @@ namespace Team11_CA.Shop.Services
             //Retrieve product from the basket if it exists
             BasketItem item = basket.BasketItems.FirstOrDefault(x => x.Id == basketId);
 
-            item.Quantity = int.Parse(quantity);
-            
-            basketContext.Commit();
+            if(item != null)
+            {
+                item.Quantity = int.Parse(quantity);
+                basketContext.Commit();
+            }
         }
         public void RemoveFromBasket(string basketId)
         {

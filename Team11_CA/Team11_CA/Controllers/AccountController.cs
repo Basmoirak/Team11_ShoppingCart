@@ -46,8 +46,7 @@ namespace Team11_CA.Controllers
                 bool isValidCustomer = hash.VerifyHashedPassword(customer.Password, model.Password);
                 if (isValidCustomer)
                 {
-                    string sessionID = Guid.NewGuid().ToString();
-                    Session["SessionID"] = sessionID;
+                    Session["SessionID"] = Guid.NewGuid().ToString();
                     Session["UserID"] = customer.Id;
                     Session["Username"] = customer.Username;
                     return RedirectToAction("Index", "Home");
@@ -90,7 +89,7 @@ namespace Team11_CA.Controllers
 
             context.Commit();
 
-            return RedirectToAction("Login");
+            return RedirectToAction("Login", "Account");
         }
     }
 }

@@ -7,7 +7,7 @@ using Team11_CA.Shop.Core.Models;
 
 namespace Team11_CA.Shop.DataAccess.Repositories
 {
-    public class BasketRepository : Repository<Basket>, IRepository<Basket>
+    public class BasketRepository : Repository<Basket>, IBasketRepository
     {
         public Basket GetBasketFromUserID(string Id)
         {
