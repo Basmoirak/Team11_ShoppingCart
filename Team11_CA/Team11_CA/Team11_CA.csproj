@@ -137,6 +137,10 @@
     <Compile Include="Migrations\201910050119313_AddOrders.Designer.cs">
       <DependentUpon>201910050119313_AddOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910060432558_AddCustomerTable.cs" />
+    <Compile Include="Migrations\201910060432558_AddCustomerTable.Designer.cs">
+      <DependentUpon>201910060432558_AddCustomerTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Shop.Core\Contracts\IOrderRepository.cs" />
     <Compile Include="Shop.Core\Contracts\IOrderService.cs" />
     <Compile Include="Shop.Core\Filters\LoginFilter.cs" />
@@ -270,6 +274,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910050119313_AddOrders.resx">
       <DependentUpon>201910050119313_AddOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910060432558_AddCustomerTable.resx">
+      <DependentUpon>201910060432558_AddCustomerTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
