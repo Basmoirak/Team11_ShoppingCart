@@ -12,8 +12,11 @@
                 <div class="panel-heading">
                     <h4>@Html.ActionLink(item.Name, "ProductDetails", new { id = item.Id }, new { @style = "text-decoration: none; color: white" })</h4>
                 </div>
-                <div class="panel-body" style="max-height: 90px; overflow-y: scroll;">
+                <div class="panel-body" style="max-height: 55px; overflow-y: scroll;">
                     <p>@item.Description</p>
+                    
+                </div>
+                <div class="panel-footer">
                     <h4>$@item.Price</h4>
                 </div>
                 <div class="panel-footer">

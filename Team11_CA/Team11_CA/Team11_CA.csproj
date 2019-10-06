@@ -185,6 +185,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\login.css" />
     <Content Include="Content\niceselect\.gitignore" />
     <Content Include="Content\niceselect\css\nice-select.css" />
     <Content Include="Content\niceselect\css\style.css" />

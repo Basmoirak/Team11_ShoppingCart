@@ -23,7 +23,7 @@
                                 <p><i><b>@Html.DisplayFor(modelItem => item.OrderCreatedDate)</b></i></p>
                             </div>
                            <hr />
-                            <strong>Activation Codes</strong>
+                            <strong>Activation Codes x @item.ActivationCodes.Count()</strong>
                             <div class="">
                                 <!--Changed to only display dropdownlist if quantity > 1-->
                                 @{
@@ -45,7 +45,7 @@
 
                 <!-- List group -->
                 <ul class="list-group">
-                    <li class="list-group-item">Total: @String.Format("{0:c}",item.OrderQuantity*item.ProductPrice)</li>
+                    <li class="list-group-item"><p class="text-center"><b>Total: </b> <span class="label label-primary" style="font-size: 20px;">@String.Format("{0:c}", item.OrderQuantity * item.ProductPrice)</span></p></li>
                 </ul>
             </div>
         }
