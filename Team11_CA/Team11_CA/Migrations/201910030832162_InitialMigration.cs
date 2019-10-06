@@ -18,7 +18,7 @@ namespace Team11_CA.Migrations
                         Image = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
         }
         
         public override void Down()
