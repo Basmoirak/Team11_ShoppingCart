@@ -77,7 +77,7 @@ namespace Team11_CA.Migrations
                     Name = "Microsoft OneNote",
                     Description = "Organize your thoughts, discoveries, and ideas and simplify planning with your digital notepad.",
                     Price = 50,
-                    Image = "MicrosoftOutNote.png"
+                    Image = "MicrosoftOneNote.png"
                 },
                 new Product()
                 {
