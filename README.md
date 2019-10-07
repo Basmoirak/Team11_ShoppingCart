@@ -2,6 +2,14 @@
 
 ## Project: To create a "software sales" web application with shopping cart functionality
 
+## Installation Instructions
+- Build Team11_MVC Solution
+- Install Entity Framework 6.2.0 using NuGet Package Manager
+- Run the Enable-Migrations command in Package Manager Console to connect to your local SQL Server
+- Run the Add-Migration InitialMigration command in Package Manager Console
+- Run the Update-Database command in Package Manager Console to generate tables and seed data into your SQL Server
+https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/migrations/
+
 ## Features
 
 **Login & Registration**
