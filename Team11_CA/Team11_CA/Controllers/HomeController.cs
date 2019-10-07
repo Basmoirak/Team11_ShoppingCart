@@ -32,6 +32,7 @@ namespace Team11_CA.Controllers
             {
                 //Filter and return list of products based on search string
                 productList = context.GetFilteredProductList(searchStr, productList);
+                TempData["searchStr"] = searchStr;
                 return View(productList);
             }
         }

@@ -1,9 +1,15 @@
 ﻿@model IEnumerable<Team11_CA.Shop.Core.Models.Product>
-
-<br/>
+@{
+    var searchStr = TempData["searchStr"];
+}
+<br />
+@if (searchStr != null)
+{
+    <h4 class="lead">Search Results for <i style="color: red">@searchStr</i></h4>
+}
 
 <div class="row">
-    @foreach(var item in Model)
+    @foreach (var item in Model)
     {
         <div class="col-lg-3">
             <div class="panel panel-primary">
@@ -14,7 +20,7 @@
                 </div>
                 <div class="panel-body" style="max-height: 100px; overflow-y: scroll;">
                     <p>@item.Description</p>
-                    
+
                 </div>
                 <div class="panel-footer">
                     <h3 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">$@item.Price</h3>
@@ -22,15 +28,15 @@
                 <div class="panel-footer">
                     @using (Html.BeginForm("AddToBasket", "Basket", FormMethod.Post))
                     {
-            
+
                         <div class="plusmimus">
                             <input type="hidden" name="id" value="@item.Id" />
                             <button type="button" id="sub" class="sub btn btn-danger">-</button>
-                            <input type="text" id="1" value="1" min="1" style="width: 20px; height: 31px; text-align: center;" name="quantity"/>
+                            <input type="text" id="1" value="1" min="1" style="width: 20px; height: 31px; text-align: center;" name="quantity" />
                             <button type="button" id="add" class="add btn btn-success">+</button>
                             <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart</button>
                         </div>
-                    
+
                     }
 
                 </div>

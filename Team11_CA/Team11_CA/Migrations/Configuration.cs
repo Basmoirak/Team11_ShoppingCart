@@ -18,7 +18,7 @@ namespace Team11_CA.Migrations
         {
             //Uncomment code below for initial Migration
 
-/*            PasswordHash hash = new PasswordHash();
+         /*PasswordHash hash = new PasswordHash();
 
             context.Customers.AddOrUpdate(x => x.Id,
                 new Customer()
