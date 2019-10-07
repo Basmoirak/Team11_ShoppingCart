@@ -14,6 +14,10 @@
 - Solution will sometimes fail to run properly due to a bug in Microsoft.CodeDom.Providers.DotNetCompilerPlatform package 1.0.7. You can    refer to the link below for a solution to fix the error.
 - https://blogs.msdn.microsoft.com/jpsanders/2018/02/22/error-could-not-find-a-part-of-the-path-esitesroot0binroslyncsc-exe/
 
+## To Login 
+- Username: customer1 | Password: customer1 
+- Username: customer2 | Password: customer2
+
 ## Features
 
 **Login & Registration**
