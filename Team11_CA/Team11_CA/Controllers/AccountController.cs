@@ -50,6 +50,8 @@ namespace Team11_CA.Controllers
                     Session["SessionID"] = Guid.NewGuid().ToString();
                     Session["UserID"] = customer.Id;
                     Session["Username"] = customer.Username;
+                    Session["FirstName"] = customer.FirstName;
+                    Session["LastName"] = customer.LastName;
                     return RedirectToAction("Index", "Home");
                 }
                 else
