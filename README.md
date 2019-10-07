@@ -10,6 +10,10 @@
 - Run the Update-Database command in Package Manager Console to generate tables and seed data into your SQL Server
 - https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/migrations/
 
+## Known Errors during installation
+- Solution will sometimes fail to run properly due to a bug in Microsoft.CodeDom.Providers.DotNetCompilerPlatform package 1.0.7. You can    refer to the link below for a solution to fix the error.
+- https://blogs.msdn.microsoft.com/jpsanders/2018/02/22/error-could-not-find-a-part-of-the-path-esitesroot0binroslyncsc-exe/
+
 ## Features
 
 **Login & Registration**
