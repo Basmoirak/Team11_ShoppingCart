@@ -37,6 +37,7 @@ namespace Team11_CA.Controllers
             Customer customer = context.GetValidCustomer(model.Username);
             if (customer == null)
             {
+                ModelState.AddModelError("Username", "Username not found");
                 return View(model);
             }
             else
@@ -53,6 +54,7 @@ namespace Team11_CA.Controllers
                 }
                 else
                 {
+                    ModelState.AddModelError("Password", "Incorrect Password");
                     return View(model);
                 }
             }
